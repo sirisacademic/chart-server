@@ -1,7 +1,10 @@
 const express = require('express');
 const vg = require('vega');
 
-vg.config.load.baseURL = 'https://vega.github.io/vega-editor/app/';
+const app = express();
+
+
+//vg.config.load.baseURL = 'https://vega.github.io/vega-editor/app/';
 
 const TYPES = {
   VegaLite: require('./charts/VegaLite'),
@@ -11,8 +14,9 @@ const TYPES = {
   ZurichMap: require('./charts/ZurichMap')
 };
 
-const app = express();
+
 app.get('/:type', (request, response) => {
+    /*
   if (!TYPES[request.params.type]) {
     return response.status(404).send('Not Found');
   }
@@ -20,18 +24,41 @@ app.get('/:type', (request, response) => {
   const spec = TYPES[request.params.type]({
     spec: JSON.parse(request.query.spec)
   });
-  vg.parse.spec(spec, (error, chart) => {
-    if (error) {
-      return response.status(400).send(error.toString());
-    }
-    const view = chart({renderer: 'svg'});
-    const svg = view.update().svg();
-    response
-      .set('Cache-Control', `public, max-age=${60 * 60}`)
-      .type('svg').send(svg);
-    view.destroy();
-  });
+  */
+
+  var spec = JSON.parse(request.query.spec);
+
+
+ var view = new vg.View(
+     vg.parse(spec),
+     {
+         renderer: 'svg'
+     }
+    );
+
+    // generate a static SVG image
+    view.toSVG()
+        .then(function(svg) {
+        
+            response
+              .set('Cache-Control', `public, max-age=${60 * 60}`)
+                .type('svg').send(svg);
+          //view.destroy();
+        })
+        .catch(function(err) { console.error(err); });
+
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Listening on ${PORT}`)); // eslint-disable-line no-console
+
+app.get('/', (req, res) => {
+
+    res.send('hello world');
+});
+
+var server = app.listen(3000, function () {
+
+    var host = server.address().address;
+    var port = server.address().port;
+  
+    console.log('Example app listening at http://%s:%s', host, port);
+  });
