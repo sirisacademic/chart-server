@@ -1,4 +1,4 @@
-//const express = require('express');
+const express = require('express');
 //const vg = require('vega');
 
 const app = express();
@@ -6,13 +6,13 @@ const app = express();
 
 //vg.config.load.baseURL = 'https://vega.github.io/vega-editor/app/';
 
-const TYPES = {
+/*const TYPES = {
   VegaLite: require('./charts/VegaLite'),
   Bar: require('./charts/Bar'),
   DistrictBar: require('./charts/DistrictBar'),
   DemographicBar: require('./charts/DemographicBar'),
   ZurichMap: require('./charts/ZurichMap')
-};
+};*/
 
 /*
 
