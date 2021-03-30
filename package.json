@@ -2,7 +2,7 @@
   "name": "vega-chart-server",
   "version": "0.0.1",
   "engines": {
-    "node": "6.3.0"
+    "node": ">= 7.6.0"
   },
   "description": "",
   "main": "index.js",
