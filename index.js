@@ -49,7 +49,7 @@ app.get('/:type', (request, response) => {
 });
 
 
-app.get('/', (req, res) => {
+app.get('/', (req, response) => {
     
     var spec = {
         "$schema": "https://vega.github.io/schema/vega/v5.json",
