@@ -1,5 +1,5 @@
 const express = require('express');
-//const vg = require('vega');
+const vg = require('vega');
 
 const app = express();
 
