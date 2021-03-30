@@ -51,6 +51,9 @@ app.get('/:type', (request, response) => {
 
 app.get('/', (req, response) => {
     
+    response.send('Hello world');
+    return;
+    
     var spec = {
         "$schema": "https://vega.github.io/schema/vega/v5.json",
         "description": "A basic bar chart example, with value labels shown upon mouse hover.",
